@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.so
+.venv/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+# 大文件不进 git
+*.safetensors
+*.bin
+*.pt
+models/
+*.ncu-rep
