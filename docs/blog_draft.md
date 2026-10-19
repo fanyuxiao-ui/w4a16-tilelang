@@ -83,7 +83,7 @@ Day 11 把 DeepSeek-Coder-6.7B 的 225 个 Linear 全部替换成 `W4A16Linear`�
 | 指标 | fp16 | W4A16 | 变化 |
 |---|---:|---:|---:|
 | 已分配显存 | 12.563 GiB | 3.429 GiB | -72.7% |
-| 生成吞吐 | 46.595 token/s | 31.346 token/s | -32.7% |
+| 生成吞吐 | 48.147 token/s | 31.793 token/s | -34.0% |
 | 小样本 PPL | 2.8262 | 2.9551 | +4.56% |
 
 这是一个有用的负结果。权重显存明显下降，但吞吐没有同步提升，因为当前 GEMV 只达到理论带宽的 4%–11%，而端到端还包含 attention、KV cache、norm、采样和 Python/module 调度。测试是 HF Transformers、单请求、batch=1、贪心解码，不能写成 vLLM 服务吞吐提升。

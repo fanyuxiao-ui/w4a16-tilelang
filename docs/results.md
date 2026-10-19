@@ -469,8 +469,8 @@ scale 应用位置，以及为什么静态权重能在 GEMM 内融合而动态�
 ## Day 11：DeepSeek-Coder-6.7B 端到端验证（2026-10-20）
 
 - 新增 `W4A16Linear`，按 M=1/GEMV、M>1/桶化 GEMM 路径替换 225 个 Linear，0 个层被跳过。
-- fp16 基线：12.563 GiB 已分配显存、46.595 token/s。
-- W4A16：3.429 GiB 已分配显存、31.346 token/s；显存下降 72.7%，吞吐下降 32.7%。
+- fp16 基线：12.563 GiB 已分配显存、48.147 token/s。
+- W4A16：3.429 GiB 已分配显存、31.793 token/s；显存下降 72.7%，吞吐下降 34.0%。
 - 小样本代码 PPL：2.8262 → 2.9551，增加 4.56%。这是 128 token 参考评估，不是完整任务质量结论。
 - 归因：当前自研 GEMV 只有约 4%–11% A800 理论带宽利用率，且全模型仍包含 attention、KV cache、norm、采样和 Python/module 调度；因此不能把显存收益写成服务吞吐收益。
 - 原始结果：`benchmarks/results/day11_e2e.json`、`day11_ppl.json`；完整口径见 `docs/results_e2e.md`。

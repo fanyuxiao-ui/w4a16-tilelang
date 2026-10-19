@@ -1,15 +1,15 @@
 [
   {
-    "tokens_per_s": 46.59471644781251,
-    "tokens_per_s_stdev": 0.04982371290469695,
+    "tokens_per_s": 48.14731091371378,
+    "tokens_per_s_stdev": 0.0329801950743269,
     "sample": "#WriteashortPythonfunctionthatcomputesFibonaccinumbers.deffib(n):Ċ#Writeyourcodehere.Ċ",
     "tag": "fp16-baseline",
     "allocated_gib": 12.563118934631348,
     "peak_gib": 12.578161716461182
   },
   {
-    "tokens_per_s": 31.346091661678983,
-    "tokens_per_s_stdev": 0.03624468675737124,
+    "tokens_per_s": 31.792907273666074,
+    "tokens_per_s_stdev": 0.008818191593145492,
     "sample": "#WriteashortPythonfunctionthatcomputesFibonaccinumbers.deffib(n):#Writeyourcodehere.print(",
     "tag": "w4a16",
     "allocated_gib": 3.4293298721313477,

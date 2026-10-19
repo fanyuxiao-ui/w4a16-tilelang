@@ -5,6 +5,11 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 export PATH="/usr/local/cuda-12.8/bin:${PATH}"
 
+if [[ -z "${W4A16_MODEL_DIR:-}" ]]; then
+  echo "W4A16_MODEL_DIR must point to the local DeepSeek-Coder-6.7B directory" >&2
+  exit 2
+fi
+
 python -m compileall -q kernels baseline benchmarks scripts tests
 pytest -q tests
 python scripts/plot_decode.py
@@ -18,7 +23,7 @@ from pathlib import Path
 import subprocess
 
 root = Path.cwd()
-patterns = ("/" + "root" + "/", "/" + "home" + "/", "token" + "=", "api" + "_key" + "=", "BEGIN PRIVATE KEY")
+patterns = ("/" + "root" + "/", "/" + "home" + "/", "token" + "=", "api" + "_key" + "=", "BEGIN " + "PRIVATE KEY")
 for pattern in patterns:
     cmd = ["rg", "-n", pattern, "--glob", "*.py", "--glob", "*.md", "--glob", "*.sh", "."]
     result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)

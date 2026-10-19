@@ -36,7 +36,7 @@ TileLang 0.1.15. Measurements exclude JIT compilation unless stated.
 | | fp16 | W4A16 | change |
 |---|---:|---:|---:|
 | allocated memory | 12.563 GiB | 3.429 GiB | -72.7% |
-| generation | 46.595 token/s | 31.346 token/s | -32.7% |
+| generation | 48.147 token/s | 31.793 token/s | -34.0% |
 | small-sample PPL | 2.8262 | 2.9551 | +4.56% |
 
 The end-to-end result is intentionally reported with its boundary: the current
