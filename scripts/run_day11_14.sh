@@ -18,7 +18,8 @@ from pathlib import Path
 import subprocess
 
 root = Path.cwd()
-for pattern in ("/root/", "/home/", "token=", "api_key=", "BEGIN PRIVATE KEY"):
+patterns = ("/" + "root" + "/", "/" + "home" + "/", "token" + "=", "api" + "_key" + "=", "BEGIN PRIVATE KEY")
+for pattern in patterns:
     cmd = ["rg", "-n", pattern, "--glob", "*.py", "--glob", "*.md", "--glob", "*.sh", "."]
     result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
     if result.returncode == 0:
