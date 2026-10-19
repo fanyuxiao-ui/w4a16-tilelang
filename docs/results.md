@@ -405,3 +405,63 @@ scale 应用位置，以及为什么静态权重能在 GEMM 内融合而动态�
 - 原始日志：`docs/day05_benchmark.log`。
 - JSON：`benchmarks/results/day05_dequant_gemm_v1.json`。
 - 编译提示：TileLang 报告 extent=2 的 vectorized loop 未找到有效向量化方案，最终按 serial loop 降级；这项优化留到 Day 6 处理。
+
+## Day 6：W4A16 v2 性能优化（2026-10-20）
+
+### 实现与 autotune
+
+- `dequant_gemm_v2` 把每个 K tile 的 scale 先搬入 shared，再解包 Q；`T.use_swizzle(panel_size=10)` 和 Q shared layout swizzle 均提供为可复现实验开关。
+- `benchmarks/sweep_dequant_v2.py` 在 `128×1024×1024` 上完成 7 个 block/stage 配置，7/7 正确性通过。
+- TileLang `@autotune` 实跑 8 个配置，最佳配置为 `block_M=64, block_N=64, block_K=128, num_stages=2, threads=128`，延迟 `0.0260096 ms`。完整候选和日志摘要见 `benchmarks/results/day06_autotune.json`。
+
+### 多 shape 对标（A800，g=128）
+
+| 场景 | shape | v1 ms | v2 ms | v2+block swizzle ms | 两步走 ms | cuBLAS fp16 ms |
+|---|---|---:|---:|---:|---:|---:|
+| decode | 1×4096×4096 | 0.08269 | 0.07877 | 0.07927 | 0.06733 | 0.04287 |
+| decode | 16×4096×4096 | 0.08383 | 0.07958 | 0.08019 | 0.06762 | 0.04277 |
+| small-batch | 128×4096×4096 | 0.10060 | 0.10089 | 0.09944 | 0.07680 | 0.04731 |
+| prefill | 512×4096×4096 | 0.27742 | 0.28086 | 0.28025 | 0.12504 | 0.09114 |
+| prefill | 1024×4096×4096 | 0.47009 | 0.46688 | 0.46709 | 0.20463 | 0.16986 |
+| prefill-big | 4096×4096×4096 | 1.77607 | 1.75480 | 1.75071 | 0.66569 | 0.63746 |
+| ffn-up | 1024×11008×4096 | 1.23183 | 1.20505 | 1.20486 | 0.50261 | 0.42456 |
+| ffn-down | 1024×4096×11008 | 1.30951 | 1.22273 | 1.22916 | 0.52760 | 0.43987 |
+
+这轮实测没有达到手册预设的 2×：scale 预取在大多数 shape 上是约 0.9% 的收益，rasterization swizzle 在 `4096³` 上再带来约 0.2%。原因是 scale 张量很小且已经有较好的 cache 命中，新增 shared copy 与同步成本抵消了大部分收益；下一步应改为 register dequant/magic layout，而不是继续堆 shared 缓存。
+
+原始 JSON：`benchmarks/results/day06_w4a16_all.json`、`day06_v2_sweep.json`、`day06_autotune.json`。
+
+## Day 7：手写 CUDA dequant GEMM（2026-10-20）
+
+- 新增 `baseline/cuda/dequant_gemm.cu`、binding 和 loader；实现 BM=BN=16、BK=32 的 shared-memory、逐线程标量累加 baseline。
+- 正确性：`tests/test_dequant_gemm_cuda.py` 的 3 组 shape 通过，平均相对差约 `1.68e-4`。
+- 4096³：手写 CUDA `67.08633 ms / 2.049 TFLOPS`，TileLang v2 `1.75474 ms / 78.324 TFLOPS`。差距来自未使用 cp.async、多级流水、寄存器分块和 MMA，完整对比见 `docs/notes_cuda_vs_tilelang.md`。
+- 5 个 shape 的实测 JSON：`benchmarks/results/day07_cuda_vs_tilelang.json`。
+
+## Day 8：工业 int4 对标（2026-10-20）
+
+- PyTorch `torch._convert_weight_to_int4pack` + `torch._weight_int4pack_mm` 路径 A 已跑通；Torch 2.7 的 CUDA 实现要求 bf16 激活、`innerKTiles=8`，scale/zero 形状为 `[K/group,N,2]`。
+- 4096³ 的 decode（M=1）路径 A 为 `0.01804 ms`；M=16 为 `0.04504 ms`；M=512 为 `0.93610 ms`。这些数字和本项目 row-major signed-nibble v2 不同 layout、不同激活 dtype，单独标为工业参考。
+- Marlin 的差距归因和未实测边界见 `docs/results_industry.md`。
+
+## Day 9：decode GEMV 与带宽（2026-10-20）
+
+- 新增 `kernels/gemv_w4a16.py`；3 组正确性 shape 的平均相对差小于 `1.1e-6`。
+- A800 理论值（N=K=4096）：fp16 权重约 33.6 MB、带宽下界约 16.5 μs；W4A16 packed 权重+scale 约 8.6 MB、带宽下界约 4.2 μs，字节上限约 3.9×。
+
+| N×K | GEMV 延迟 | GEMV 有效带宽 | A800 理论带宽利用率 | v2@M=1 | 两步走 | cuBLAS fp16 |
+|---|---:|---:|---:|---:|---:|---:|
+| 4096×4096 | 96.82 μs | 89.518 GB/s | 4.39% | 78.98 μs | 67.02 μs | 42.62 μs |
+| 11008×4096 | 102.90 μs | 226.230 GB/s | 11.10% | 93.59 μs | 166.61 μs | 79.72 μs |
+| 4096×11008 | 288.61 μs | 80.659 GB/s | 3.96% | 198.85 μs | 174.53 μs | 82.51 μs |
+| 8192×8192 | 228.37 μs | 151.665 GB/s | 7.44% | 178.55 μs | 244.52 μs | 111.56 μs |
+
+官方 TileLang fp16xint4 GEMV 示例（8192²、无 scale 的参考口径）实测 `0.036570 ms`，约 45% 的 packed-weight 带宽利用率。自研一列只有 4%–11%，说明每线程一列的非连续行访问是主要瓶颈；后续应采用官方的 warp 级 K 归约、16B 向量装载和寄存器解包。
+
+原始 JSON：`benchmarks/results/day09_decode.json`。
+
+## Day 10：MoE 场景量化（2026-10-20）
+
+- Qwen1.5-MoE-A2.7B checkpoint 需要约 29 GB bf16，而当前工作区低于 35 GB 安全阈值，因此用确定性的 ToyMoE fallback 完成同一专家 Linear 结构的量化、PPL proxy、GEMV 和权重字节预算；边界已写进 `docs/moe_quant.md`。
+- 8 experts、top-2、hidden=512、intermediate=1024；g=128 的专家 rel L2 均值 `0.07060`，g=64 为 `0.06979`。
+- top-2 理论权重流量：bf16 `6,291,456 B`，W4A16 `1,622,016 B`，约 `3.8788×` 压缩；逐专家 GEMV 与 toy 端到端 control 原始数据见 `benchmarks/results/day10_moe.json`。

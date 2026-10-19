@@ -1,0 +1,30 @@
+{
+  "day": 5,
+  "version": "dequant_gemm_v1",
+  "hardware": "NVIDIA A800 80GB PCIe (SM80)",
+  "torch": "2.7.0+cu128",
+  "cuda": "12.8",
+  "tilelang": "0.1.15",
+  "shape": {
+    "M": 4096,
+    "N": 4096,
+    "K": 4096
+  },
+  "group_size": 128,
+  "block": {
+    "M": 64,
+    "N": 64,
+    "K": 128
+  },
+  "num_stages": 2,
+  "threads": 128,
+  "warmup_ms": 25,
+  "rep_ms": 100,
+  "first_device_call_ms": 382.376,
+  "median_ms": 1.765,
+  "tflops": 77.852,
+  "correctness": "passed: 4 shapes vs torch and two-kernel references",
+  "source_log": "docs/day05_benchmark.log",
+  "correctness_log": "docs/day05_correctness.log",
+  "note": "TileLang reported that vectorized extent 2 was lowered as serial."
+}

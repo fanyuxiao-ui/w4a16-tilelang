@@ -1,0 +1,12 @@
+[04:05:41] : Warning: T.vectorized loop over `vec` with extent 2 is lowered as a serial loop because TileLang could not find a valid vectorization plan. Scalar accumulator updates inside the loop are a common cause; move reductions to T.unroll or T.serial if this is intended.
+[04:05:42] : Warning: T.vectorized loop over `vec` with extent 2 is lowered as a serial loop because TileLang could not find a valid vectorization plan. Scalar accumulator updates inside the loop are a common cause; move reductions to T.unroll or T.serial if this is intended.
+[04:05:42] : Warning: T.vectorized loop over `vec` with extent 2 is lowered as a serial loop because TileLang could not find a valid vectorization plan. Scalar accumulator updates inside the loop are a common cause; move reductions to T.unroll or T.serial if this is intended.
+2026-10-20 04:05:39  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:137): TileLang begins to compile kernel `main` with `out_idx=None`
+2026-10-20 04:05:42  [TileLang:tilelang.jit.kernel:INFO] (kernel.py:145): TileLang completes to compile kernel `main`
+first_call_ms=382.376
+v1_ms=1.765
+v1_tflops=77.852
+shape=4096x4096x4096 group_size=128 block_M=64 block_N=64 block_K=128 num_stages=2 threads=128
+warmup_ms=25 rep_ms=100 (tilelang.profiler.do_bench)
+device=NVIDIA A800 80GB PCIe
+torch=2.7.0+cu128

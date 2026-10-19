@@ -1,0 +1,74 @@
+{
+  "day": 6,
+  "shape": [
+    128,
+    1024,
+    1024
+  ],
+  "configs": [
+    {
+      "block_M": 64,
+      "block_N": 64,
+      "block_K": 128,
+      "num_stages": 1,
+      "threads": 128
+    },
+    {
+      "block_M": 64,
+      "block_N": 64,
+      "block_K": 128,
+      "num_stages": 2,
+      "threads": 128
+    },
+    {
+      "block_M": 64,
+      "block_N": 128,
+      "block_K": 128,
+      "num_stages": 1,
+      "threads": 128
+    },
+    {
+      "block_M": 64,
+      "block_N": 128,
+      "block_K": 128,
+      "num_stages": 2,
+      "threads": 128
+    },
+    {
+      "block_M": 128,
+      "block_N": 64,
+      "block_K": 128,
+      "num_stages": 1,
+      "threads": 128
+    },
+    {
+      "block_M": 128,
+      "block_N": 64,
+      "block_K": 128,
+      "num_stages": 2,
+      "threads": 128
+    },
+    {
+      "block_M": 128,
+      "block_N": 128,
+      "block_K": 128,
+      "num_stages": 1,
+      "threads": 128
+    },
+    {
+      "block_M": 128,
+      "block_N": 128,
+      "block_K": 128,
+      "num_stages": 2,
+      "threads": 128
+    }
+  ],
+  "selected": {
+    "block_M": 64,
+    "block_N": 64,
+    "block_K": 128,
+    "num_stages": 2,
+    "threads": 128
+  },
+  "selected_latency_ms": 0.0260096
+}

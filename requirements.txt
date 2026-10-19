@@ -3,3 +3,4 @@ torch>=2.3
 transformers>=4.40
 matplotlib
 pytest
+ninja  # torch.utils.cpp_extension loader for baseline/cuda

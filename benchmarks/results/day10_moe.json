@@ -1,0 +1,450 @@
+{
+  "day": 10,
+  "model": "deterministic ToyMoE fallback",
+  "reason": "Qwen1.5-MoE-A2.7B checkpoint needs ~29 GB bf16; workspace is below the 35 GB safety threshold",
+  "experts": 8,
+  "top_k": 2,
+  "hidden": 512,
+  "intermediate": 1024,
+  "baseline_ppl": 255.22531127929688,
+  "quantization": {
+    "128": {
+      "mean_rel_err": 0.07060051119575898,
+      "max_rel_err": 0.07075081020593643,
+      "ppl": 255.1216278076172,
+      "ppl_increase_pct": -0.040624290420088194,
+      "layers": [
+        {
+          "module": "experts.0.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07067335397005081
+        },
+        {
+          "module": "experts.0.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.0706292986869812
+        },
+        {
+          "module": "experts.0.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07056337594985962
+        },
+        {
+          "module": "experts.1.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07051972299814224
+        },
+        {
+          "module": "experts.1.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07066013664007187
+        },
+        {
+          "module": "experts.1.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.070640429854393
+        },
+        {
+          "module": "experts.2.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07051154226064682
+        },
+        {
+          "module": "experts.2.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07053935527801514
+        },
+        {
+          "module": "experts.2.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07055288553237915
+        },
+        {
+          "module": "experts.3.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07067432999610901
+        },
+        {
+          "module": "experts.3.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07052838802337646
+        },
+        {
+          "module": "experts.3.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.070561483502388
+        },
+        {
+          "module": "experts.4.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07056815177202225
+        },
+        {
+          "module": "experts.4.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.0706816017627716
+        },
+        {
+          "module": "experts.4.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07063744962215424
+        },
+        {
+          "module": "experts.5.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07059282064437866
+        },
+        {
+          "module": "experts.5.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07060472667217255
+        },
+        {
+          "module": "experts.5.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07062019407749176
+        },
+        {
+          "module": "experts.6.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07062918692827225
+        },
+        {
+          "module": "experts.6.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07057968527078629
+        },
+        {
+          "module": "experts.6.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07075081020593643
+        },
+        {
+          "module": "experts.7.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07063784450292587
+        },
+        {
+          "module": "experts.7.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.07055307924747467
+        },
+        {
+          "module": "experts.7.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.07050241529941559
+        }
+      ]
+    },
+    "64": {
+      "mean_rel_err": 0.06978999574979146,
+      "max_rel_err": 0.0699254646897316,
+      "ppl": 255.0380859375,
+      "ppl_increase_pct": -0.07335688645394578,
+      "layers": [
+        {
+          "module": "experts.0.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06983934342861176
+        },
+        {
+          "module": "experts.0.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06979987025260925
+        },
+        {
+          "module": "experts.0.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06974469870328903
+        },
+        {
+          "module": "experts.1.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06974776834249496
+        },
+        {
+          "module": "experts.1.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06984187662601471
+        },
+        {
+          "module": "experts.1.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.0698385015130043
+        },
+        {
+          "module": "experts.2.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.0697154849767685
+        },
+        {
+          "module": "experts.2.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06973668932914734
+        },
+        {
+          "module": "experts.2.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06976941972970963
+        },
+        {
+          "module": "experts.3.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06985105574131012
+        },
+        {
+          "module": "experts.3.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06971166282892227
+        },
+        {
+          "module": "experts.3.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06973423063755035
+        },
+        {
+          "module": "experts.4.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06973990052938461
+        },
+        {
+          "module": "experts.4.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.0698571428656578
+        },
+        {
+          "module": "experts.4.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06982060521841049
+        },
+        {
+          "module": "experts.5.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06978929787874222
+        },
+        {
+          "module": "experts.5.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06978176534175873
+        },
+        {
+          "module": "experts.5.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06983773410320282
+        },
+        {
+          "module": "experts.6.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.0698302760720253
+        },
+        {
+          "module": "experts.6.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06978590786457062
+        },
+        {
+          "module": "experts.6.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.0699254646897316
+        },
+        {
+          "module": "experts.7.gate_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06980698555707932
+        },
+        {
+          "module": "experts.7.up_proj",
+          "shape": [
+            1024,
+            512
+          ],
+          "rel_err": 0.06978289037942886
+        },
+        {
+          "module": "experts.7.down_proj",
+          "shape": [
+            512,
+            1024
+          ],
+          "rel_err": 0.06967132538557053
+        }
+      ]
+    }
+  },
+  "single_expert": [
+    {
+      "projection": "gate_proj",
+      "N": 1024,
+      "K": 512,
+      "bf16_ms": 0.009335625916719437,
+      "w4a16_ms": 0.014401327818632126,
+      "int4_bytes": 270336,
+      "w4a16_gbps": 18.984916074632412
+    },
+    {
+      "projection": "up_proj",
+      "N": 1024,
+      "K": 512,
+      "bf16_ms": 0.00943895522505045,
+      "w4a16_ms": 0.014738403260707855,
+      "int4_bytes": 270336,
+      "w4a16_gbps": 18.550720533539586
+    },
+    {
+      "projection": "down_proj",
+      "N": 512,
+      "K": 1024,
+      "bf16_ms": 0.009274560026824474,
+      "w4a16_ms": 0.02297048829495907,
+      "int4_bytes": 270336,
+      "w4a16_gbps": 11.902576753668752
+    }
+  ],
+  "theoretical_weight_bytes": {
+    "bf16": 6291456,
+    "w4a16": 1622016,
+    "ratio": 3.878787878787879
+  },
+  "toy_e2e_ms": {
+    "bf16": 6.225647449493408,
+    "w4a16_dequantized_fp16_control": 6.2244181632995605
+  }
+}

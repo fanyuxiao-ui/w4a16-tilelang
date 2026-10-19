@@ -1,0 +1,41 @@
+[
+  {
+    "day": 8,
+    "M": 1,
+    "N": 4096,
+    "K": 4096,
+    "dtype": "bf16",
+    "innerKTiles": 8,
+    "output_shape": [
+      1,
+      4096
+    ],
+    "ms": 0.01804
+  },
+  {
+    "day": 8,
+    "M": 16,
+    "N": 4096,
+    "K": 4096,
+    "dtype": "bf16",
+    "innerKTiles": 8,
+    "output_shape": [
+      16,
+      4096
+    ],
+    "ms": 0.04504
+  },
+  {
+    "day": 8,
+    "M": 512,
+    "N": 4096,
+    "K": 4096,
+    "dtype": "bf16",
+    "innerKTiles": 8,
+    "output_shape": [
+      512,
+      4096
+    ],
+    "ms": 0.9361
+  }
+]

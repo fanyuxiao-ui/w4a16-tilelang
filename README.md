@@ -6,8 +6,11 @@ with hand-written CUDA baselines, validated on A800 (SM80).
 ## Status
 - [x] Day 1–4: FP16 GEMM baseline, INT4 reference/packing, dequant kernel and real-weight study
 - [x] W4A16 dequant GEMM v1 (Day 5 correctness/performance baseline)
-- [ ] Hand-written CUDA baseline
-- [ ] Benchmarks vs cuBLAS / Marlin
+- [x] W4A16 dequant GEMM v2, autotune and multi-shape benchmark (Day 6)
+- [x] Hand-written CUDA baseline (Day 7)
+- [x] Benchmarks vs cuBLAS / PyTorch int4pack industrial reference (Day 8)
+- [x] Decode GEMV and bandwidth study (Day 9)
+- [x] MoE expert quantization study (Day 10; deterministic ToyMoE fallback)
 - [ ] End-to-end evaluation on DeepSeek-Coder-6.7B
 
 Day 1–4 reproduction details, JSON results and plots are in `docs/results.md` and
