@@ -15,7 +15,7 @@
 ## Day 0：模型权重（DeepSeek-Coder-6.7B-base）
 
 - 来源：modelscope，仅 safetensors 版（`--exclude 'pytorch_model*'` 跳过重复的 bin 版，省 12.6GB）
-- 路径：`/root/autodl-tmp/models/deepseek-coder-6.7b-base`，共 13.48 GB
+- 路径：`$W4A16_MODEL_DIR`（本机实验使用 DeepSeek-Coder-6.7B），共约 13.48 GB
 - 完整性校验：291 个 tensor 与 `model.safetensors.index.json` 完全一致，文件头可读
 - 加载测试：transformers 加载通过（6.74B 参数，bf16），CPU 前向通过（80s，CPU 上正常）
 
@@ -465,3 +465,12 @@ scale 应用位置，以及为什么静态权重能在 GEMM 内融合而动态�
 - Qwen1.5-MoE-A2.7B checkpoint 需要约 29 GB bf16，而当前工作区低于 35 GB 安全阈值，因此用确定性的 ToyMoE fallback 完成同一专家 Linear 结构的量化、PPL proxy、GEMV 和权重字节预算；边界已写进 `docs/moe_quant.md`。
 - 8 experts、top-2、hidden=512、intermediate=1024；g=128 的专家 rel L2 均值 `0.07060`，g=64 为 `0.06979`。
 - top-2 理论权重流量：bf16 `6,291,456 B`，W4A16 `1,622,016 B`，约 `3.8788×` 压缩；逐专家 GEMV 与 toy 端到端 control 原始数据见 `benchmarks/results/day10_moe.json`。
+
+## Day 11：DeepSeek-Coder-6.7B 端到端验证（2026-10-20）
+
+- 新增 `W4A16Linear`，按 M=1/GEMV、M>1/桶化 GEMM 路径替换 225 个 Linear，0 个层被跳过。
+- fp16 基线：12.563 GiB 已分配显存、46.595 token/s。
+- W4A16：3.429 GiB 已分配显存、31.346 token/s；显存下降 72.7%，吞吐下降 32.7%。
+- 小样本代码 PPL：2.8262 → 2.9551，增加 4.56%。这是 128 token 参考评估，不是完整任务质量结论。
+- 归因：当前自研 GEMV 只有约 4%–11% A800 理论带宽利用率，且全模型仍包含 attention、KV cache、norm、采样和 Python/module 调度；因此不能把显存收益写成服务吞吐收益。
+- 原始结果：`benchmarks/results/day11_e2e.json`、`day11_ppl.json`；完整口径见 `docs/results_e2e.md`。

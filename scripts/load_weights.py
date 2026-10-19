@@ -5,8 +5,10 @@ from pathlib import Path
 
 from safetensors import safe_open
 
+from scripts.paths import MODEL_DIR
 
-DEFAULT_MODEL_DIR = Path(os.path.expanduser("~/autodl-tmp/models/deepseek-coder-6.7b-base"))
+
+DEFAULT_MODEL_DIR = MODEL_DIR
 _INDEX_CACHE = {}
 
 

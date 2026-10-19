@@ -1,6 +1,7 @@
-tilelang==0.1.15        # ← 本机实际安装版本（2026-10-11）
-torch>=2.3
-transformers>=4.40
-matplotlib
-pytest
-ninja  # torch.utils.cpp_extension loader for baseline/cuda
+tilelang==0.1.15
+torch==2.7.0
+transformers==5.19.0
+matplotlib==3.11.2
+pytest==9.1.1
+safetensors==0.8.0
+ninja==1.13.2

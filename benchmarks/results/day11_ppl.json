@@ -1,0 +1,8 @@
+{
+  "text_tokens": 128,
+  "fp16_ppl": 2.8262417362080305,
+  "w4a16_ppl": 2.9551241928859304,
+  "relative_change_pct": 4.560206405090517,
+  "replaced": 225,
+  "skipped": []
+}
