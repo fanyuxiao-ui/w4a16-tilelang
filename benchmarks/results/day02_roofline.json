@@ -1,0 +1,62 @@
+[
+  {
+    "M": 1,
+    "N": 4096,
+    "K": 4096,
+    "flops": 33554432,
+    "bytes_fp16": 33570816,
+    "ai_fp16": 1.0,
+    "balance": 153.0,
+    "bound": "memory-bound",
+    "t_ideal_fp16_us": 16.46,
+    "bytes_w4a16": 8667136,
+    "ai_w4a16": 3.9,
+    "t_ideal_w4a16_us": 4.25,
+    "speedup_ceiling": 3.87
+  },
+  {
+    "M": 16,
+    "N": 4096,
+    "K": 4096,
+    "flops": 536870912,
+    "bytes_fp16": 33816576,
+    "ai_fp16": 15.9,
+    "balance": 153.0,
+    "bound": "memory-bound",
+    "t_ideal_fp16_us": 16.58,
+    "bytes_w4a16": 8912896,
+    "ai_w4a16": 60.2,
+    "t_ideal_w4a16_us": 4.37,
+    "speedup_ceiling": 3.79
+  },
+  {
+    "M": 256,
+    "N": 4096,
+    "K": 4096,
+    "flops": 8589934592,
+    "bytes_fp16": 37748736,
+    "ai_fp16": 227.6,
+    "balance": 153.0,
+    "bound": "compute-bound",
+    "t_ideal_fp16_us": 18.51,
+    "bytes_w4a16": 12845056,
+    "ai_w4a16": 668.7,
+    "t_ideal_w4a16_us": 6.3,
+    "speedup_ceiling": 2.94
+  },
+  {
+    "M": 4096,
+    "N": 4096,
+    "K": 4096,
+    "flops": 137438953472,
+    "bytes_fp16": 100663296,
+    "ai_fp16": 1365.3,
+    "balance": 153.0,
+    "bound": "compute-bound",
+    "t_ideal_fp16_us": 49.37,
+    "bytes_w4a16": 75759616,
+    "ai_w4a16": 1814.1,
+    "t_ideal_w4a16_us": 37.16,
+    "speedup_ceiling": 1.33
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "M": 1024,
+    "N": 1024,
+    "K": 1024,
+    "tilelang_ms": 0.0443,
+    "tilelang_tflops": 48.5,
+    "tilelang_rel_err": 0.000208,
+    "tilelang_ok": true,
+    "cublas_ms": 0.0235,
+    "cublas_tflops": 91.4,
+    "tl/cublas": 1.885
+  },
+  {
+    "M": 4096,
+    "N": 4096,
+    "K": 4096,
+    "tilelang_ms": 0.7363,
+    "tilelang_tflops": 186.7,
+    "tilelang_rel_err": 0.000208,
+    "tilelang_ok": true,
+    "cublas_ms": 0.5988,
+    "cublas_tflops": 229.5,
+    "tl/cublas": 1.23
+  },
+  {
+    "M": 8192,
+    "N": 8192,
+    "K": 8192,
+    "tilelang_ms": 5.6007,
+    "tilelang_tflops": 196.3,
+    "tilelang_rel_err": 0.000207,
+    "tilelang_ok": true,
+    "cublas_ms": 4.6831,
+    "cublas_tflops": 234.8,
+    "tl/cublas": 1.196
+  },
+  {
+    "M": 16,
+    "N": 4096,
+    "K": 4096,
+    "tilelang_ms": 0.064,
+    "tilelang_tflops": 8.4,
+    "tilelang_rel_err": 0.000208,
+    "tilelang_ok": true,
+    "cublas_ms": 0.0429,
+    "cublas_tflops": 12.5,
+    "tl/cublas": 1.492
+  },
+  {
+    "M": 1,
+    "N": 4096,
+    "K": 4096,
+    "tilelang_ms": 0.1287,
+    "tilelang_tflops": 0.3,
+    "tilelang_rel_err": 0.000208,
+    "tilelang_ok": true,
+    "cublas_ms": 0.0424,
+    "cublas_tflops": 0.8,
+    "tl/cublas": 3.035
+  }
+]
