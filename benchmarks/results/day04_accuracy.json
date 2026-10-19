@@ -1,0 +1,167 @@
+[
+  {
+    "tensor": "q_proj",
+    "shape": [
+      4096,
+      4096
+    ],
+    "gran": "tensor",
+    "rel_l2": 0.8808213472366333
+  },
+  {
+    "tensor": "q_proj",
+    "shape": [
+      4096,
+      4096
+    ],
+    "gran": "channel",
+    "rel_l2": 0.18913814425468445,
+    "cos": 0.9825522303581238
+  },
+  {
+    "tensor": "q_proj",
+    "shape": [
+      4096,
+      4096
+    ],
+    "gran": "group32",
+    "group_size": 32,
+    "rel_l2": 0.0985855683684349,
+    "cos": 0.9951809644699097,
+    "meta_ratio": 0.125
+  },
+  {
+    "tensor": "q_proj",
+    "shape": [
+      4096,
+      4096
+    ],
+    "gran": "group64",
+    "group_size": 64,
+    "rel_l2": 0.1103999987244606,
+    "cos": 0.9939662218093872,
+    "meta_ratio": 0.0625
+  },
+  {
+    "tensor": "q_proj",
+    "shape": [
+      4096,
+      4096
+    ],
+    "gran": "group128",
+    "group_size": 128,
+    "rel_l2": 0.12179496139287949,
+    "cos": 0.9926688075065613,
+    "meta_ratio": 0.03125
+  },
+  {
+    "tensor": "gate_proj",
+    "shape": [
+      11008,
+      4096
+    ],
+    "gran": "tensor",
+    "rel_l2": 0.7481936812400818
+  },
+  {
+    "tensor": "gate_proj",
+    "shape": [
+      11008,
+      4096
+    ],
+    "gran": "channel",
+    "rel_l2": 0.16548724472522736,
+    "cos": 0.9865808486938477
+  },
+  {
+    "tensor": "gate_proj",
+    "shape": [
+      11008,
+      4096
+    ],
+    "gran": "group32",
+    "group_size": 32,
+    "rel_l2": 0.09754255414009094,
+    "cos": 0.9952816367149353,
+    "meta_ratio": 0.125
+  },
+  {
+    "tensor": "gate_proj",
+    "shape": [
+      11008,
+      4096
+    ],
+    "gran": "group64",
+    "group_size": 64,
+    "rel_l2": 0.1085202693939209,
+    "cos": 0.9941680431365967,
+    "meta_ratio": 0.0625
+  },
+  {
+    "tensor": "gate_proj",
+    "shape": [
+      11008,
+      4096
+    ],
+    "gran": "group128",
+    "group_size": 128,
+    "rel_l2": 0.1187310665845871,
+    "cos": 0.9930289387702942,
+    "meta_ratio": 0.03125
+  },
+  {
+    "tensor": "down_proj",
+    "shape": [
+      4096,
+      11008
+    ],
+    "gran": "tensor",
+    "rel_l2": 0.9920521974563599
+  },
+  {
+    "tensor": "down_proj",
+    "shape": [
+      4096,
+      11008
+    ],
+    "gran": "channel",
+    "rel_l2": 0.17980173230171204,
+    "cos": 0.9842046499252319
+  },
+  {
+    "tensor": "down_proj",
+    "shape": [
+      4096,
+      11008
+    ],
+    "gran": "group32",
+    "group_size": 32,
+    "rel_l2": 0.09823331981897354,
+    "cos": 0.9952149987220764,
+    "meta_ratio": 0.125
+  },
+  {
+    "tensor": "down_proj",
+    "shape": [
+      4096,
+      11008
+    ],
+    "gran": "group64",
+    "group_size": 64,
+    "rel_l2": 0.10943662375211716,
+    "cos": 0.994070291519165,
+    "meta_ratio": 0.0625
+  },
+  {
+    "tensor": "down_proj",
+    "shape": [
+      4096,
+      11008
+    ],
+    "gran": "group128",
+    "group_size": 128,
+    "rel_l2": 0.11989472806453705,
+    "cos": 0.9928932189941406,
+    "meta_ratio": 0.03125
+  }
+]
