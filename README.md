@@ -85,6 +85,7 @@ The first TileLang call compiles a kernel. Results are written to
 ## Blog and interview material
 
 - Draft: [`docs/blog_draft.md`](docs/blog_draft.md)
+- Release: [v1.0 on GitHub](https://github.com/fanyuxiao-ui/w4a16-tilelang/releases/tag/v1.0)
 - Resume bullets: [`docs/resume_bullets.md`](docs/resume_bullets.md)
 - Interview answers: [`docs/interview_answers.md`](docs/interview_answers.md)
 - Future work: [`docs/todo.md`](docs/todo.md)
