@@ -1,0 +1,140 @@
+[
+  {
+    "block_M": 128,
+    "block_N": 128,
+    "block_K": 32,
+    "num_stages": 3,
+    "threads": 128,
+    "ms": 0.7449,
+    "tflops": 184.5,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 128,
+    "block_N": 128,
+    "block_K": 64,
+    "num_stages": 3,
+    "threads": 128,
+    "ms": 0.7693,
+    "tflops": 178.6,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 128,
+    "block_N": 256,
+    "block_K": 64,
+    "num_stages": 3,
+    "threads": 256,
+    "ms": 0.7332,
+    "tflops": 187.4,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 64,
+    "block_N": 128,
+    "block_K": 64,
+    "num_stages": 4,
+    "threads": 128,
+    "ms": 0.8668,
+    "tflops": 158.6,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 64,
+    "block_N": 64,
+    "block_K": 32,
+    "num_stages": 2,
+    "threads": 128,
+    "ms": 0.9741,
+    "tflops": 141.1,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 64,
+    "block_N": 128,
+    "block_K": 32,
+    "num_stages": 3,
+    "threads": 128,
+    "ms": 0.7927,
+    "tflops": 173.4,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 128,
+    "block_N": 64,
+    "block_K": 32,
+    "num_stages": 3,
+    "threads": 128,
+    "ms": 0.851,
+    "tflops": 161.5,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 128,
+    "block_N": 256,
+    "block_K": 32,
+    "num_stages": 2,
+    "threads": 256,
+    "ms": 0.8481,
+    "tflops": 162.1,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 256,
+    "block_N": 128,
+    "block_K": 64,
+    "num_stages": 3,
+    "threads": 256,
+    "ms": 0.7234,
+    "tflops": 190.0,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 256,
+    "block_N": 256,
+    "block_K": 64,
+    "num_stages": 3,
+    "threads": 256,
+    "ms": null,
+    "tflops": null,
+    "max_abs_err": null,
+    "ok": false,
+    "error": "InternalError: Failed to set the allowed dynamic shared memory size to 196608"
+  },
+  {
+    "block_M": 128,
+    "block_N": 128,
+    "block_K": 64,
+    "num_stages": 4,
+    "threads": 128,
+    "ms": 0.7658,
+    "tflops": 179.5,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "block_M": 64,
+    "block_N": 256,
+    "block_K": 64,
+    "num_stages": 4,
+    "threads": 256,
+    "ms": 0.8674,
+    "tflops": 158.4,
+    "max_abs_err": 0.126587,
+    "ok": true
+  },
+  {
+    "config": "cublas",
+    "ms": 0.6258,
+    "tflops": 219.6
+  }
+]

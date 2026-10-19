@@ -1,7 +1,8 @@
-"""Day 1 步骤 5：gemm_bf16 第一轮参数扫描（4096³ fp16）。
+"""Day 1 步骤 5：gemm_bf16 参数扫描（4096³ fp16）。
 
-只改参数、不改代码，观察 TFLOPS 变化；顺带打一行 cuBLAS 参考值。
+只改参数、不改代码，观察 TFLOPS 变化；结果同时落成 JSON，供后续画图和复盘。
 """
+import json
 import pathlib
 import sys
 
@@ -12,6 +13,7 @@ import torch  # noqa: E402
 from tilelang.profiler import do_bench  # noqa: E402
 
 from kernels.gemm_bf16 import gemm_bf16  # noqa: E402
+from benchmarks.bench_common import save_results  # noqa: E402
 
 M = N = K = 4096
 FLOPS = 2 * M * N * K
@@ -23,6 +25,14 @@ CONFIGS = [
     (128, 128, 64, 3, 128),
     (128, 256, 64, 3, 256),
     (64, 128, 64, 4, 128),
+    (64, 64, 32, 2, 128),
+    (64, 128, 32, 3, 128),
+    (128, 64, 32, 3, 128),
+    (128, 256, 32, 2, 256),
+    (256, 128, 64, 3, 256),
+    (256, 256, 64, 3, 256),
+    (128, 128, 64, 4, 128),
+    (64, 256, 64, 4, 256),
 ]
 
 
@@ -42,6 +52,7 @@ c = torch.empty(M, N, device="cuda", dtype=torch.float16)
 ref64 = (a.double() @ bt.double()).float()
 
 print(f"4096³ fp16  |  峰值 312 TFLOPS  |  {'config':<26} {'ms':>8} {'TFLOPS':>8}  {'max|err|':>9} 校验")
+rows = []
 for bm, bn, bk, st, th in CONFIGS:
     tag = f"bm{bm} bn{bn} bk{bk} st{st} th{th}"
     try:
@@ -50,9 +61,19 @@ for bm, bn, bk, st, th in CONFIGS:
         max_err = (c.float() - ref64).abs().max().item()
         ok = torch.allclose(c.float(), ref64, rtol=1e-2, atol=1e-2)
         ms = do_bench(lambda: kernel(a, b, c), warmup=25, rep=100)
-        print(f"{'':<14}{tag:<26} {ms:>8.3f} {tflops(ms):>8.1f}  {max_err:>9.4f} {'✅' if ok else '❌ 偏离 fp64 真值'}")
+        tf = tflops(ms)
+        print(f"{'':<14}{tag:<26} {ms:>8.3f} {tf:>8.1f}  {max_err:>9.4f} {'✅' if ok else '❌ 偏离 fp64 真值'}")
+        rows.append(dict(block_M=bm, block_N=bn, block_K=bk, num_stages=st,
+                         threads=th, ms=round(ms, 4), tflops=round(tf, 1),
+                         max_abs_err=round(max_err, 6), ok=bool(ok)))
     except Exception as e:
         print(f"{'':<14}{tag:<26} FAILED {type(e).__name__}: {str(e)[:120]}")
+        rows.append(dict(block_M=bm, block_N=bn, block_K=bk, num_stages=st,
+                         threads=th, ms=None, tflops=None, max_abs_err=None,
+                         ok=False, error=f"{type(e).__name__}: {e}"))
 
 ms = do_bench(lambda: a @ bt, warmup=25, rep=100)
 print(f"{'':<14}{'cuBLAS (仅性能参考)':<26} {ms:>8.3f} {tflops(ms):>8.1f}")
+rows.append(dict(config="cublas", ms=round(ms, 4), tflops=round(tflops(ms), 1)))
+
+save_results("day01_sweep_gemm_bf16.json", rows)
